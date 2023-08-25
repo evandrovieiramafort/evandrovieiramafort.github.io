@@ -1,0 +1,22 @@
+h1 {
+    background-color: gray;
+}
+
+.centro {
+    background-color: rgb(170, 168, 168);
+    margin: 15px;
+    padding: 15px;
+}
+
+.familia {
+    background-color: rgb(170, 168, 168);
+    margin: 15px;
+    padding: 15px;
+}
+
+.compre {
+    background-color: rgb(101, 156, 238);
+    color: blue;
+    padding-left: 20%;
+    font-size: 75px;
+}
