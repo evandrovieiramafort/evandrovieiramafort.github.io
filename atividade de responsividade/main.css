@@ -1,0 +1,364 @@
+/* Estilos para telas maiores que 767px */
+header {
+    background-color: rgb(0, 96, 124);
+    display: flex;
+    align-items: flex-start;
+    height: 7vw;
+}
+
+header h1 {
+    position: relative;
+    left: 1.5vw;
+    top: 0.5vw;
+    font-size: 2.4vw;
+}
+
+header ul {
+    display: flex;
+    align-items: flex-start;
+    gap: 6vw;
+    text-decoration: none;
+    list-style-type: none;
+    position: relative;
+    top: 0.9vw;
+    left: 5.5vw;
+    font-size: 1.8vw;
+}
+
+header a {
+    text-decoration: none;
+    color: black;
+}
+
+header a:hover {
+    color: white;
+}
+
+#menu-icon {
+    display: none;
+}
+
+#menu-toggle {
+    display: none;
+}
+
+main {
+    width: 85vw;
+    position: relative;
+    left: 6.5vw;
+}
+
+.banner {
+    background-color: rgb(0, 108, 159);
+    height: 20vw;
+}
+
+.banner h1 {
+    position: relative;
+    left: 3vw;
+    top: 3vw;
+}
+
+.img1 {
+    position: relative;
+    left: 35vw;
+    top: 1.5vw;
+}
+
+.subtitle {
+    position: relative;
+    left: 3vw;
+    bottom: 9.1vw;
+}
+
+.hack {
+    height: 40px;
+    background-color: rgb(0, 108, 159);
+}
+
+.box {
+    background-color: rgb(214, 232, 247);
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.box_2 {
+    background-color: rgb(214, 232, 247);
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+    grid-column: span 2;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.button_1 {
+    background-color: rgb(101, 88, 245);
+    color: #FFFFFF; 
+    border: none; 
+    padding: 10px 50px; 
+    font-size: 12px;
+}
+
+.button_2 {
+    background-color: rgb(101, 88, 245);
+    color: #FFFFFF;
+    border: none; 
+    padding: 10px 250px; 
+    font-size: 12px;
+}
+.grid {
+        display: flex;
+        flex-direction: column;
+    }
+
+nav {
+    background-color: rgb(0, 96, 124);
+    display: flex;
+    align-items: flex-start;
+    height: 3vw;
+}
+
+nav ul {
+    display: flex;
+    align-items: flex-start;
+    gap: 6vw;
+    text-decoration: none;
+    list-style-type: none;
+    position: relative;
+    bottom: 1.3vw;
+    left: 5.5vw;
+    font-size: 1.8vw;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+}
+
+nav a:hover {
+    color: white;
+}
+
+footer {
+    display: flex;
+    align-items: flex-start;
+    height: 3vw;
+    width: 85vw;
+    position: relative;
+    left: 6.5vw;
+}
+
+footer p {
+    display: flex;
+    align-items: flex-start;
+    gap: 6vw;
+    text-decoration: none;
+    list-style-type: none;
+    position: relative;
+    top: 0.1vw;
+    left: 1.75vw;
+    font-size: 1vw;
+}
+
+footer ul {
+    display: flex;
+    align-items: flex-start;
+    gap: 3vw;
+    text-decoration: none;
+    list-style-type: none;
+    position: relative;
+    bottom: 0.7vw;
+    left: 3vw;
+    font-size: 1.5vw;
+}
+
+footer a {
+    text-decoration: none;
+    color: black;
+}
+
+.testimonials h3 {
+    text-align: center;
+    font-size: 30px;
+}
+
+.testimonials p {
+    text-align: center;
+}
+
+.img2 {
+    display: block; 
+    margin: 0 auto; 
+    text-align: center;
+}
+
+blockquote {
+    background-color: rgb(214, 232, 247);
+    font-size: 25px;
+    text-align: center;
+}
+
+@media screen and (max-width: 1300px) {
+    .subtitle {
+        position: relative;
+        bottom: 11.8vw;
+    }
+}
+
+/* Estilos para tablets */
+@media screen and (max-width: 1023px) {
+    header {
+        height: 10vw;
+    }
+    header h1 {
+        position: relative;
+        left: 1.5vw;
+        top: 1vw;
+        font-size: 3vw;
+    }
+    header ul {
+        gap: 4vw;
+        position: relative;
+        top: 1.6vw;
+        left: 0vw;
+        font-size: 2.2vw;
+    }
+    .banner {
+        height: 27vw;
+    }
+    .img1 {
+        position: relative;
+        left: 35vw;
+        bottom: 3.5vw;
+        width: 20vw;
+        height: 15vw;
+    }
+    .subtitle {
+        position: relative;
+        left: 3vw;
+        bottom: 16.3vw;
+    }
+    blockquote {
+        font-size: 19px;
+    }
+    .nav2 {
+        display: none;
+    }
+    footer {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .box {
+        width: 38vw;
+    }
+    .paiBox {
+        display: flex;
+        justify-content: center;
+        gap: 4vw;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .testimonials {
+        display: flex;
+    }
+    blockquote {
+        width: 30vw;
+    }
+}
+
+/* Estilos para celulares */
+@media screen and (max-width: 767px) {
+    /* Mostrar o ícone do hamburguer */
+    header {
+        height: 12.5vw;
+        margin-bottom: 10px;
+    }
+    header h1 {
+        font-size: 4vw;
+        text-align: center;
+        position: relative;
+        left: 30vw;
+    }
+    #menu-icon {
+        height: 4.8vw;
+        width: 4vw;
+        font-size: 4vw;
+        cursor: pointer;
+        padding: 10px 20px;
+        background-color: #333;
+        color: white;
+        position: relative;
+        top: 2.3vw;
+        left: 51vw;
+        z-index: 2;
+        display: flex; /* Mostra o ícone */
+    }
+
+    /* Esconder o menu regular */
+    header ul {
+        display: none;
+    }
+
+    /* Mostrar o menu de navegação quando o ícone for clicado */
+    #menu-toggle:checked + label + nav ul {
+        display: block;
+    }
+
+    main {
+        width: 100%;
+        position: static;
+    }
+
+    .banner {
+        height: 42vw;
+        display: flex;
+        flex-direction: column; /* Alinhar os elementos verticalmente */
+        justify-content: center; /* Centralizar verticalmente */
+        align-items: center;
+    }
+    .banner h1 {
+        font-size: 40px;
+        position: static;
+    }
+    .img1 {
+        width: 25vw;
+        height: 20vw;
+        position: relative;
+        top: 0vw;
+        bottom: 3vw;
+        left: 0vw;
+    }
+    .subtitle {
+        position: static;
+        text-align: center;
+    }
+    .hack {
+        height: 20px;
+        background-color: rgb(0, 108, 159);
+    }
+    .box,
+    .box_2 {
+        margin-bottom: 0;
+    }
+    .button_1,
+    .button_2 {
+        width: 100%;
+        max-width: none; 
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #menu-icon {
+        position: relative;
+        left: 40vw;
+    }
+    header h1 {
+        font-size: 5vw;
+        position: relative;
+        left: 27vw;
+    }
+}
