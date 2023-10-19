@@ -1,0 +1,167 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.menu {
+    background-color: black;
+    height: 240px;
+}
+
+.menu h1, p{
+    color: white;
+    text-align: center;
+    position: relative;
+    top: 40px;
+}
+
+
+.menu p {
+    font-size: 10px;
+    color: grey;
+}
+
+.menu_nav {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    position: relative;
+    top: 100px;
+    list-style: none;
+}
+
+.menu_nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+}
+
+.Homepage{
+    background-color: rgb(191, 40, 95);
+}
+
+.destaque{
+    background-color: rgba(220,87,45,255);
+    height: 240px;
+}
+
+.destaque h2, p{
+    color: black;
+    text-align: center;
+    position: relative;
+    top: 50px;
+}
+
+.destaque p{
+    position: relative;
+    top: 70px;
+    margin-left: 30vw;
+    margin-right: 30vw;
+}
+
+.servicos{
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: row;
+}
+
+.servicos h1{
+    font-size: 17px;
+    position: relative;
+    top: 25px;
+}
+
+.servicos p{
+    text-align: center;
+    color: black;
+}
+
+.servicos a{
+    position: relative;
+    top: 90px;
+    background-color: rgb(191, 40, 95);
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+}
+
+.card {
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 30px;
+}
+
+.titulo_2 h2,p {
+    text-align: center;
+}
+
+.titulo_2 h2 {
+    margin-top: 120px;
+    margin-bottom: 0px;
+    position: relative;
+    top: 30px;
+}
+
+.espaco_card {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.servicos_2 {
+    margin-top: 75px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.servicos_2 h1{
+    font-size: 17px;
+    position: relative;
+    top: 60px;
+}
+
+.servicos_2 p{
+    text-align: center;
+    color: black;
+}
+
+.servicos_2 a{
+    position: relative;
+    top: 90px;
+    background-color: rgb(191, 40, 95);
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+}
+
+.card_2 {
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 30px;
+}
+
+.card_2 h3 {
+    position: relative;
+    top: 40px;
+}
+
+.rodape {
+    margin-top: 125px;
+    height: 225px;
+    background-color: black;
+}
+
+.rodape p {
+    color: white;
+}
+
+.rodape ul {
+    margin-top: 110px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+}
