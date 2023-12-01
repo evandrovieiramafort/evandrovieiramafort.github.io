@@ -1,0 +1,363 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.menu{
+    position: fixed;
+    z-index: 2;
+    width: 100vw;
+    height: 15vh;
+    background-color: red;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.menu img{
+    height: 12vh;
+    width: auto;
+    position: relative;
+    left: 1vw;
+}
+
+.menu a{
+    position: relative;
+    left: 42vw;
+    border: 2px solid #000;
+    border-radius: 20px;
+    text-decoration: none;
+    width: 15vw;
+    height: 5vh;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 4vh;
+    text-align: center;
+    color: black;
+}
+
+#imgEnd{
+    position: relative;
+    left: 44vw;
+}
+
+.menu h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 900;
+    position: relative;
+    left: 3vw;
+    font-size: 80px;
+}
+
+.centro{
+    box-sizing: border-box;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100vw;
+    height: 100vh;
+    background-image: url(img/fundo_guitarras.jpg);
+    background-size: cover;
+    background-position: center center;
+    z-index: -2;
+    overflow-y: scroll;
+    scrollbar-color: transparent transparent;
+}
+
+.centro::-webkit-scrollbar {
+    width: 0px; /* ajuste conforme necessário */
+}
+
+.centro::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+.centro::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.box01{
+    background-color: red;
+    width: 90vw;
+    height: 45vh;
+    margin-top: 20vh;
+    margin-left: 11vw;
+    border-radius: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.box01 img{
+    width: 30vw;
+    height: 35vh;
+    border-radius: 30px;
+    margin-left: 12vw;
+}
+
+.textoBox01{
+    margin-left: 10px;
+    width: 45vw;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.textoBox01 pre{
+    font-size: 35px;
+    font-weight: 900;
+}
+
+.textoBox01 p {
+    position: relative;
+    top: 10px;
+    font-size: 20px;
+}
+
+.box02{
+    background-color: red;
+    width: 90vw;
+    height: 40vh;
+    margin-top: 5vh;
+    position: relative;
+    right: 1vw;
+    border-radius: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.box02 img{
+    width: 30vw;
+    height: 35vh;
+    border-radius: 30px;
+    margin-left: 12vw;
+}
+
+.textoBox02{
+    margin-left: 30px;
+    width: 45vw;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.textoBox02 pre{
+    font-size: 35px;
+    font-weight: 900;
+}
+
+.textoBox02 ul,li{
+    margin-left: 10px;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.box03{
+    background-color: red;
+    width: 60vw;
+    height: 10vh;
+    margin-top: 5vh;
+    position: relative;
+    left: 41vw;
+    border-radius: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.box03 p{
+    font-size: 35px;
+    font-weight: 900;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 1vw;
+}
+
+.box04{
+    margin-top: 5vh;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5vw;
+}
+
+.b1,.b2,.b3,.b4{
+    background-color: red;
+    height: 40vh;
+    width: 20vw;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.b1 img{
+    width: 18vw;
+    margin-top: 4vh;
+}
+
+.b1 a{
+    text-decoration: none;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    height: 7vh;
+    width: 15vw;
+    border-radius: 30px;
+    margin-bottom: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.b2 img{
+    width: 18vw;
+    margin-bottom: 4vh;
+}
+
+.b2 a{
+    text-decoration: none;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    height: 7vh;
+    width: 15vw;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8vh;
+}
+
+.b3 img{
+    width: 16vw;
+}
+
+.b3 a{
+    margin-top: 8vh;
+    text-decoration: none;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    height: 7vh;
+    width: 15vw;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.b4 img{
+    width: 18vw;
+    margin-bottom: 8vh;
+}
+
+.b4 a{
+    margin-top: 1vh;
+    text-decoration: none;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    height: 7vh;
+    width: 15vw;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer{
+    margin-top: 3vh;
+    width: 100vw;
+    height: 15vh;
+    background-color: red;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+footer p{
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 2vw;
+}
+
+@media screen and (max-width: 400px) {
+    .menu h1{
+        font-size: 25px;
+        position: relative;
+        left: 0vw;
+    }
+    .menu a{
+        position: relative;
+        left: 18vw;
+        height: 13vh;
+        width: 20vw;
+        font-size: 10px;
+        line-height: 1.2;
+        padding-top: 2vh;
+    }
+
+    .box01{
+        height: auto;
+    }
+
+    .box01 img{
+        width: 40vw;
+        height: 55vh;
+        border-radius: 30px;
+        margin-left: 1vw;
+    }
+
+    .box02{
+        height: auto;
+    }
+
+    .textoBox01 pre{
+        font-size: 15px;
+        font-weight: 900;
+    }
+    .textoBox01 p{
+        font-size: 12px;
+        font-weight: 900;
+    }
+
+    .textoBox01{
+        margin-left: 1vw;
+    }
+
+    .textoBox02{
+        margin-left: 1vw;
+    }
+
+    .textoBox02 pre{
+        font-size: 15px;
+        font-weight: 900;
+    }
+    .textoBox02 li{
+        font-size: 12px;
+        font-weight: 900;
+    }
+
+    .box03{
+        width: 90vw;
+        position: relative;
+        left: 1vw;
+    }
+
+    .box03 p{
+        font-size: 11px;
+    }
+
+    .b1 a, .b2 a, .b3 a, .b4 a{
+        border-radius: 5px;
+        font-size: 10px;
+        margin-top: 0;
+    }
+    .b3 img{
+        margin-bottom: 2vh;
+    }
+
+    .b4 img{
+        margin-bottom: 2vh;
+    }
+}
