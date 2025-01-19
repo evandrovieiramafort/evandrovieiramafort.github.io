@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>mark.md</title>
+<title>markdown.md</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
 <style>
@@ -391,14 +391,14 @@ code {
 <pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConectorSingleton</span> </span>{
 
     <span class="hljs-comment"># Atributo privado e estático com o mesmo nome da classe usado para armazenar o Singleton</span>
-    <span class="hljs-keyword">private</span> <span class="hljs-built_in">static</span> <span class="hljs-variable">$ConectorSingleton</span> = <span class="hljs-literal">null</span>;
-    <span class="hljs-keyword">private</span> <span class="hljs-variable">$configuracoes</span> = []; <span class="hljs-comment">// Esse array é um atributo opcional que usei pra explicar implementação de métodos adicionais</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-built_in">static</span> ?ConectorSingleton <span class="hljs-variable">$ConectorSingleton</span> = <span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">array</span> <span class="hljs-variable">$configuracoes</span> = []; <span class="hljs-comment">// Esse array é um atributo opcional que usei pra explicar implementação de métodos adicionais</span>
 
     <span class="hljs-comment"># Construtor privado para evitar criação direta</span>
     <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"></span>) </span>{}
 
     <span class="hljs-comment"># Método estático para obter a instância única</span>
-    <span class="hljs-keyword">public</span> <span class="hljs-built_in">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getInstancia</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getInstancia</span>(<span class="hljs-params"></span>): <span class="hljs-title">ConectorSingleton</span> </span>{
         <span class="hljs-keyword">if</span> (<span class="hljs-built_in">self</span>::<span class="hljs-variable">$ConectorSingleton</span> === <span class="hljs-literal">null</span>) {
             <span class="hljs-built_in">self</span>::<span class="hljs-variable">$ConectorSingleton</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ConectorSingleton</span>();
         }
@@ -406,17 +406,17 @@ code {
     }
 
     <span class="hljs-comment"># Método para adicionar uma configuração ao conector do bd</span>
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setConfiguracao</span>(<span class="hljs-params"><span class="hljs-variable">$chave</span>, <span class="hljs-variable">$valor</span></span>) </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setConfiguracao</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> <span class="hljs-variable">$chave</span>, <span class="hljs-keyword">mixed</span> <span class="hljs-variable">$valor</span></span>): <span class="hljs-title">void</span> </span>{
         <span class="hljs-variable language_">$this</span>-&gt;configuracoes[<span class="hljs-variable">$chave</span>] = <span class="hljs-variable">$valor</span>;
     }
 
     <span class="hljs-comment"># Método para obter uma configuração setada</span>
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getConfiguracao</span>(<span class="hljs-params"><span class="hljs-variable">$chave</span></span>) </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getConfiguracao</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> <span class="hljs-variable">$chave</span></span>): <span class="hljs-title">mixed</span> </span>{
         <span class="hljs-keyword">return</span> <span class="hljs-variable language_">$this</span>-&gt;configuracoes[<span class="hljs-variable">$chave</span>] ?? <span class="hljs-literal">null</span>;
     }
 
     <span class="hljs-comment"># Método para remover uma configuração setada</span>
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">removeConfiguracao</span>(<span class="hljs-params"><span class="hljs-variable">$chave</span></span>) </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">removeConfiguracao</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> <span class="hljs-variable">$chave</span></span>): <span class="hljs-title">void</span></span>{
         <span class="hljs-keyword">unset</span>(<span class="hljs-variable language_">$this</span>-&gt;configuracoes[<span class="hljs-variable">$chave</span>]);
     }
 }
@@ -457,21 +457,21 @@ de várias classes e métodos em apenas uma classe.</p>
 <pre class="hljs"><code><div>
 <span class="hljs-comment"># Primeira classe </span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Estoque</span> </span>{
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">verificarEstoque</span>(<span class="hljs-params"><span class="hljs-variable">$produtoId</span></span>) </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">verificarEstoque</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> <span class="hljs-variable">$produtoId</span></span>): <span class="hljs-title">string</span></span>{
         <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Produto <span class="hljs-subst">$produtoId</span> disponível no estoque.\n&quot;</span>;
     }
 }
 
 <span class="hljs-comment"># Segunda classe</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pagamento</span> </span>{
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">processarPagamento</span>(<span class="hljs-params"><span class="hljs-variable">$valor</span></span>) </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">processarPagamento</span>(<span class="hljs-params"><span class="hljs-keyword">float</span> <span class="hljs-variable">$valor</span></span>): <span class="hljs-title">string</span> </span>{
         <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Pagamento de R$ <span class="hljs-subst">$valor</span> processado.\n&quot;</span>;
     }
 }
 
 <span class="hljs-comment"># Terceira classe</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Envio</span> </span>{
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">organizarEnvio</span>(<span class="hljs-params"><span class="hljs-variable">$produtoId</span></span>) </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">organizarEnvio</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> <span class="hljs-variable">$produtoId</span></span>): <span class="hljs-title">string</span> </span>{
         <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Produto <span class="hljs-subst">$produtoId</span> preparado para envio.\n&quot;</span>;
     }
 }
@@ -481,9 +481,9 @@ de várias classes e métodos em apenas uma classe.</p>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PedidoFacade</span> </span>{
     
     <span class="hljs-comment"># Um atributo para cada classe que desejamos implementar</span>
-    <span class="hljs-keyword">private</span> <span class="hljs-variable">$estoque</span>;
-    <span class="hljs-keyword">private</span> <span class="hljs-variable">$pagamento</span>;
-    <span class="hljs-keyword">private</span> <span class="hljs-variable">$envio</span>;
+    <span class="hljs-keyword">private</span> Estoque <span class="hljs-variable">$estoque</span>;
+    <span class="hljs-keyword">private</span> Pagamento <span class="hljs-variable">$pagamento</span>;
+    <span class="hljs-keyword">private</span> Envio <span class="hljs-variable">$envio</span>;
 
     <span class="hljs-comment"># Construtor que implementa todas as classes</span>
     <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"></span>) </span>{
@@ -493,7 +493,7 @@ de várias classes e métodos em apenas uma classe.</p>
     }
 
     <span class="hljs-comment"># Método que realiza todas as operações</span>
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">processarPedido</span>(<span class="hljs-params"><span class="hljs-variable">$produtoId</span>, <span class="hljs-variable">$valor</span></span>) </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">processarPedido</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> <span class="hljs-variable">$produtoId</span>, <span class="hljs-keyword">float</span> <span class="hljs-variable">$valor</span></span>): <span class="hljs-title">string</span> </span>{
         <span class="hljs-variable">$result</span> = <span class="hljs-variable language_">$this</span>-&gt;estoque-&gt;<span class="hljs-title function_ invoke__">verificarEstoque</span>(<span class="hljs-variable">$produtoId</span>);
         <span class="hljs-variable">$result</span> .= <span class="hljs-variable language_">$this</span>-&gt;pagamento-&gt;<span class="hljs-title function_ invoke__">processarPagamento</span>(<span class="hljs-variable">$valor</span>);
         <span class="hljs-variable">$result</span> .= <span class="hljs-variable language_">$this</span>-&gt;envio-&gt;<span class="hljs-title function_ invoke__">organizarEnvio</span>(<span class="hljs-variable">$produtoId</span>);
@@ -509,58 +509,58 @@ de várias classes e métodos em apenas uma classe.</p>
 <p>Objetivo: Permitir que objetos observadores sejam notificados automaticamente sempre que o objeto observado sofrer mudanças.</p>
 <h3 id="passo-a-passo-receita-de-bolo">Passo a Passo (Receita de Bolo):</h3>
 <ol>
-<li>Crie uma interface para os Observadores:
+<li><strong>Crie uma interface para os Observadores:</strong>
 <ul>
 <li>Deve conter um método que será chamado quando ocorrer uma mudança.</li>
 </ul>
 </li>
-<li>Implemente a interface nos observadores que desejam ser notificados.</li>
-<li>Adicione uma lista de observadores no objeto observado.</li>
-<li>Implemente métodos para adicionar, remover e notificar observadores.</li>
-<li>Sempre que algo mudar no objeto observado, chame o método de notificação.</li>
+<li><strong>Implemente a interface nos observadores que desejam ser notificados.</strong></li>
+<li><strong>Adicione uma lista de observadores no objeto observado.</strong></li>
+<li><strong>Implemente métodos para adicionar, remover e notificar observadores.</strong></li>
+<li><strong>Sempre que algo mudar no objeto observado, chame o método de notificação.</strong></li>
 </ol>
 <p>Exemplo em php:</p>
 <pre class="hljs"><code><div>
 <span class="hljs-comment"># Interface que será aplicada nas classes desejadas</span>
 <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Observer</span> </span>{
     <span class="hljs-comment"># Método que será implementado pelas classes que observam notificações</span>
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">notificar</span>(<span class="hljs-params"><span class="hljs-variable">$mensagem</span></span>)</span>;
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">notificar</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> <span class="hljs-variable">$mensagem</span></span>): <span class="hljs-title">void</span></span>;
 }
 
 <span class="hljs-comment"># Classe que implementará a interface Observer</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Usuario</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Observer</span> </span>{
-    <span class="hljs-keyword">private</span> <span class="hljs-variable">$nome</span>; <span class="hljs-comment">// Atributo para armazenar o nome do usuário</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">string</span> <span class="hljs-variable">$nome</span>; <span class="hljs-comment">// Atributo para armazenar o nome do usuário</span>
 
     <span class="hljs-comment"># Construtor para inicializar o nome do usuário</span>
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"><span class="hljs-variable">$nome</span></span>) </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> <span class="hljs-variable">$nome</span></span>) </span>{
         <span class="hljs-variable language_">$this</span>-&gt;nome = <span class="hljs-variable">$nome</span>;
     }
 
     <span class="hljs-comment"># Implementação do método notificar, definido na interface Observer</span>
     <span class="hljs-comment"># Esse método será chamado para enviar notificações ao usuário</span>
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">notificar</span>(<span class="hljs-params"><span class="hljs-variable">$mensagem</span></span>) </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">notificar</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> <span class="hljs-variable">$mensagem</span></span>): <span class="hljs-title">void</span> </span>{
         <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Notificação para <span class="hljs-subst">{$this-&gt;nome}</span>: <span class="hljs-subst">{$mensagem}</span>\n&quot;</span>;
     }
 }
 
 <span class="hljs-comment"># Classe Blog que será o sujeito &quot;observado&quot; pelos usuários</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Blog</span> </span>{
-    <span class="hljs-keyword">private</span> <span class="hljs-variable">$inscritos</span> = []; <span class="hljs-comment">// Lista de objetos que implementam Observer (usuários inscritos)</span>
-    <span class="hljs-keyword">private</span> <span class="hljs-variable">$artigos</span> = [];  <span class="hljs-comment">// Lista de artigos publicados no blog</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">array</span> <span class="hljs-variable">$inscritos</span> = []; <span class="hljs-comment">// Lista de objetos que implementam Observer (usuários inscritos)</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">array</span> <span class="hljs-variable">$artigos</span> = [];  <span class="hljs-comment">// Lista de artigos publicados no blog</span>
 
     <span class="hljs-comment"># Método para inscrever um usuário no blog</span>
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">inscrever</span>(<span class="hljs-params">Observer <span class="hljs-variable">$usuario</span></span>) </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">inscrever</span>(<span class="hljs-params">Observer <span class="hljs-variable">$usuario</span></span>): <span class="hljs-title">void</span> </span>{
         <span class="hljs-variable language_">$this</span>-&gt;inscritos[] = <span class="hljs-variable">$usuario</span>; <span class="hljs-comment">// Adiciona o usuário na lista de inscritos</span>
     }
 
     <span class="hljs-comment"># Método para publicar um novo artigo</span>
-    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">publicarArtigo</span>(<span class="hljs-params"><span class="hljs-variable">$titulo</span></span>) </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">publicarArtigo</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> <span class="hljs-variable">$titulo</span></span>): <span class="hljs-title">void</span> </span>{
         <span class="hljs-variable language_">$this</span>-&gt;artigos[] = <span class="hljs-variable">$titulo</span>; <span class="hljs-comment">// Armazena o título do novo artigo</span>
         <span class="hljs-variable language_">$this</span>-&gt;<span class="hljs-title function_ invoke__">notificarUsuarios</span>(<span class="hljs-string">&quot;Novo artigo publicado: <span class="hljs-subst">$titulo</span>&quot;</span>); <span class="hljs-comment">// Notifica os inscritos sobre o novo artigo</span>
     }
 
     <span class="hljs-comment"># Método privado para notificar todos os usuários inscritos</span>
-    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">notificarUsuarios</span>(<span class="hljs-params"><span class="hljs-variable">$mensagem</span></span>) </span>{
+    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">notificarUsuarios</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> <span class="hljs-variable">$mensagem</span></span>): <span class="hljs-title">void</span> </span>{
         <span class="hljs-comment"># Itera sobre todos os inscritos e chama o método notificar para cada um</span>
         <span class="hljs-keyword">foreach</span> (<span class="hljs-variable language_">$this</span>-&gt;inscritos <span class="hljs-keyword">as</span> <span class="hljs-variable">$usuario</span>) {
             <span class="hljs-variable">$usuario</span>-&gt;<span class="hljs-title function_ invoke__">notificar</span>(<span class="hljs-variable">$mensagem</span>);
