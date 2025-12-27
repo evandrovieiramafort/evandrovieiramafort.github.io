@@ -1,0 +1,18 @@
+{
+  "name": "evandrovieiramafort.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.26.2",
+  "devDependencies": {
+    "cypress": "^15.8.1",
+    "jest": "^30.2.0"
+  }
+}

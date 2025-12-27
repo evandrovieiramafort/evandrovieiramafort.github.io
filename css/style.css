@@ -69,8 +69,14 @@ body { margin: 0; padding: 0 0 180px 0; background-color: var(--cor-fundo-pagina
 .botao-cabecalho:active { background: rgba(255,255,255,0.3); }
 .botao-cabecalho svg { width: 18px; height: 18px; fill: currentColor; }
 
-.entrada-orcamento { width: 100%; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); padding: 10px; font-size: 1.8rem; border-radius: 8px; color: white; font-weight: bold; }
+.container-orcamento { display: flex; gap: 10px; align-items: center; }
+
+.entrada-orcamento { flex: 1; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); padding: 10px; font-size: 1.8rem; border-radius: 8px; color: white; font-weight: bold; }
 .entrada-orcamento::placeholder { color: rgba(255,255,255,0.4); }
+
+.botao-limpar-orcamento { width: 50px; padding: 10px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.botao-limpar-orcamento:active { background: rgba(255,255,255,0.3); }
+.botao-limpar-orcamento svg { width: 24px; height: 24px; fill: currentColor; }
 
 .cartao-adicionar { background: var(--cor-fundo-card); padding: 15px; margin-bottom: 10px; box-shadow: 0 4px 6px var(--sombra-padrao); }
 .grade-formulario { display: flex; flex-direction: column; gap: 12px; }

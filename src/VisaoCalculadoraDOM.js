@@ -8,6 +8,7 @@ export class VisaoCalculadoraDOM {
         this.botaoSalvar = document.getElementById("botaoSalvar")
         this.botaoLimpar = document.getElementById("botaoLimparCampos")
         this.botaoLimparTudo = document.getElementById("botaoLimparTudo")
+        this.botaoLimparOrcamento = document.getElementById("botaoLimparOrcamento")
         this.botaoTema = document.getElementById("botaoTema")
         this.barraBusca = document.getElementById("barraBusca")
         this.entradaOrcamento = document.getElementById("entradaOrcamento")
@@ -16,23 +17,31 @@ export class VisaoCalculadoraDOM {
         this.elementoTotal = document.getElementById("totalGasto")
         this.elementoSaldo = document.getElementById("saldoRestante")
         this.cabecalho = document.getElementById("cabecalhoPrincipal")
+        this.listaItens = document.getElementById("listaItens")
 
         this.caminhoSol = "M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,2L14.39,5.42C13.65,5.15 12.84,5 12,5C11.16,5 10.35,5.15 9.61,5.42L12,2M3.34,7L7.5,5.29C7.24,5.84 6.96,6.42 6.69,7L2.5,9L3.34,7M3.36,17L2.5,15L6.68,17C6.95,17.58 7.23,18.16 7.49,18.71L3.36,17M20.65,7L21.5,9L17.3,7C17.03,6.42 16.75,5.84 16.5,5.29L20.65,7M20.64,17L16.5,18.71C16.76,18.16 17.04,17.58 17.31,17L21.5,15L20.64,17M12,22L9.61,18.58C10.35,18.85 11.16,19 12,19C12.84,19 13.65,18.85 14.39,18.58L12,22Z"
         this.caminhoLua = "M17.75,4.09L15.22,6.03L16.13,9.09L13.5,7.28L10.87,9.09L11.78,6.03L9.25,4.09L12.44,4L13.5,1L14.56,4L17.75,4.09M21.25,11L19.61,12.25L20.2,14.23L18.5,13.06L16.8,14.23L17.39,12.25L15.75,11L17.81,10.95L18.5,9L19.19,10.95L21.25,11M18.97,15.95C19.8,15.87 20.69,17.05 20.16,17.8C19.84,18.25 19.5,18.67 19.08,19.07C15.17,23 8.84,23 4.94,19.07C1.03,15.17 1.03,8.84 4.94,4.94C5.34,4.53 5.76,4.17 6.21,3.85C6.96,3.32 8.14,4.21 8.06,5.04C7.79,7.9 8.75,10.87 10.95,13.06C13.14,15.26 16.1,16.22 18.97,15.95M17.33,17.97C14.5,17.81 11.7,16.64 9.53,14.5C7.38,12.35 6.21,9.54 6.05,6.71C4.26,8.35 3.13,10.87 3.5,13.56C3.87,16.26 6.15,18.54 8.85,18.91C11.45,19.29 13.95,18.2 15.6,16.4C16.25,15.7 16.84,14.9 17.33,14Z"
         this.caminhoEditar = "M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
         this.caminhoDeletar = "M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z"
+        this.caminhoVassoura = "M19.36,2.72L20.78,4.14L15.06,9.85C16.13,11.39 16.28,13.24 15.38,14.44L9.06,8.12C10.26,7.22 12.11,7.37 13.65,8.44L19.36,2.72M5.93,17.57C3.92,15.56 2.69,13.16 2.35,10.92L7.23,8.83L14.67,16.27L12.58,21.15C10.34,20.81 7.94,19.58 5.93,17.57Z"
 
         this.#registrarEventos()
+        this.#inicializarIconeLimparOrcamento()
     }
 
     async iniciar() {
         await this.#controladora.iniciar()
     }
 
+    #inicializarIconeLimparOrcamento() {
+        this.botaoLimparOrcamento.appendChild(this.criarIcone(this.caminhoVassoura))
+    }
+
     #registrarEventos() {
         this.botaoSalvar.addEventListener("click", () => this.#controladora.salvar())
         this.botaoLimpar.addEventListener("click", () => this.#controladora.limparCampos())
         this.botaoLimparTudo.addEventListener("click", () => this.#controladora.limparTudo())
+        this.botaoLimparOrcamento.addEventListener("click", () => this.#controladora.limparOrcamento())
         this.botaoTema.addEventListener("click", () => this.#controladora.alternarTema())
         this.barraBusca.addEventListener("keyup", (e) => this.#controladora.buscar(e.target.value))
         
@@ -179,6 +188,8 @@ export class VisaoCalculadoraDOM {
     definirOrcamento(valor) {
         if (valor > 0) {
             this.entradaOrcamento.value = this.#formatarInput(valor)
+        } else {
+            this.entradaOrcamento.value = ""
         }
     }
 

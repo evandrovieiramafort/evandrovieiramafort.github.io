@@ -88,6 +88,14 @@ export class ControladoraCalculadoraAsync {
         this.#visao.limparFormulario()
     }
 
+    limparOrcamento() {
+        if (confirm("Deseja zerar o orçamento?")) {
+            this.#servico.salvarOrcamento(0)
+            this.#visao.definirOrcamento(0)
+            this.#atualizarLista()
+        }
+    }
+
     buscar(termo) {
         this.#termoBusca = termo
         this.#atualizarLista()
