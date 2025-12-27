@@ -3,465 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Calculadora Mercado v9</title>
-    <style>
-        :root {
-            --bg-body: #f4f4f9;
-            --bg-card: #ffffff;
-            --text-main: #333333;
-            --text-sec: #666666;
-            --input-bg: #fafafa;
-            --input-border: #ddd;
-            --input-focus: #fff;
-            
-            --header-bg: #6200ea;
-            --header-edit: #2962ff;
-            
-            --btn-del-bg: #ffebee;
-            --btn-del-txt: #d32f2f;
-            --btn-edit-bg: #fff8e1;
-            --btn-edit-txt: #f57f17;
-            --btn-clear-bg: #eceff1;
-            --btn-clear-txt: #546e7a;
-            
-            --footer-bg: #222222;
-            --footer-border: #444444;
-            
-            --shadow: rgba(0,0,0,0.05);
-            --item-hover: #fcfcfc;
-            --item-edit-bg: #f0f7ff;
-            --item-edit-border: #2962ff;
-        }
-
-        body.dark-mode {
-            --bg-body: #121212;
-            --bg-card: #1e1e1e;
-            --text-main: #e0e0e0;
-            --text-sec: #a0a0a0;
-            --input-bg: #2c2c2c;
-            --input-border: #444444;
-            --input-focus: #333333;
-            
-            --header-bg: #3700b3; 
-            --header-edit: #004ecb;
-            
-            --btn-del-bg: #4a0d0d;
-            --btn-del-txt: #ef9a9a; 
-            --btn-edit-bg: #4a3b00;
-            --btn-edit-txt: #ffe082; 
-            --btn-clear-bg: #37474f;
-            --btn-clear-txt: #b0bec5;
-            
-            --footer-bg: #1e1e1e;
-            --footer-border: #333333;
-            
-            --shadow: rgba(0,0,0,0.3);
-            --item-hover: #252525;
-            --item-edit-bg: #1a237e; 
-            --item-edit-border: #536dfe;
-        }
-
-        * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; outline: none; -webkit-tap-highlight-color: transparent; }
-        body { margin: 0; padding: 0 0 180px 0; background-color: var(--bg-body); color: var(--text-main); transition: background 0.3s, color 0.3s; }
-        
-        .header { background: var(--header-bg); color: white; padding: 15px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.2); transition: background-color 0.3s; }
-        .header.editing { background: var(--header-edit); }
-        
-        .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-        .header label { font-size: 0.8rem; opacity: 0.9; font-weight: 500; letter-spacing: 0.5px; }
-        
-        .header-actions { display: flex; gap: 10px; align-items: center; }
-
-        .btn-header { background: rgba(255,255,255,0.15); border: none; color: white; display: flex; align-items: center; justify-content: center; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-weight: bold; backdrop-filter: blur(5px); font-size: 0.75rem; }
-        .btn-header:active { background: rgba(255,255,255,0.3); }
-        .btn-header svg { width: 18px; height: 18px; fill: currentColor; }
-
-        .budget-input { width: 100%; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); padding: 10px; font-size: 1.8rem; border-radius: 8px; color: white; font-weight: bold; }
-        .budget-input::placeholder { color: rgba(255,255,255,0.4); }
-
-        .add-card { background: var(--bg-card); padding: 15px; margin-bottom: 10px; box-shadow: 0 4px 6px var(--shadow); }
-        .form-grid { display: flex; flex-direction: column; gap: 12px; }
-        .field-container { display: flex; flex-direction: column; }
-        .input-row { display: flex; gap: 12px; }
-
-        .input-styled { width: 100%; padding: 12px; border: 1px solid var(--input-border); border-radius: 8px; font-size: 1.1rem; background: var(--input-bg); color: var(--text-main); transition: border 0.2s, background 0.2s; }
-        .input-styled:focus { border-color: #6200ea; background: var(--input-focus); }
-        .input-price { font-size: 1.3rem; font-weight: bold; }
-        .input-qty { text-align: center; }
-        
-        .label-sm { font-size: 0.75rem; color: var(--text-sec); margin-bottom: 4px; font-weight: 600; text-transform: uppercase; }
-
-        .actions-row { display: flex; gap: 10px; margin-top: 5px; }
-        
-        .btn-main { flex: 4; background: #00c853; color: white; border: none; padding: 14px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px rgba(0,200,83,0.2); text-transform: uppercase; letter-spacing: 1px; transition: background 0.2s; }
-        .btn-main:active { transform: scale(0.98); }
-        .btn-main.is-editing { background: #2962ff; box-shadow: 0 4px 6px rgba(41, 98, 255, 0.2); }
-
-        .btn-clear { flex: 1; background: var(--btn-clear-bg); color: var(--btn-clear-txt); border: 1px solid transparent; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .btn-clear:active { opacity: 0.8; }
-
-        .search-container { padding: 0 15px 15px 15px; position: relative; }
-        .search-input { width: 100%; padding: 12px 12px 12px 40px; border: 1px solid var(--input-border); border-radius: 25px; font-size: 1rem; background: var(--bg-card); color: var(--text-main); box-shadow: 0 2px 4px var(--shadow); }
-        .search-icon { position: absolute; left: 28px; top: 50%; transform: translateY(-60%); width: 18px; height: 18px; color: var(--text-sec); opacity: 0.5; pointer-events: none; }
-
-        .item-list { padding: 0 15px; }
-        .item-card { background: var(--bg-card); padding: 12px 15px; border-radius: 12px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px var(--shadow); border-left: 5px solid transparent; transition: background 0.2s; }
-        .item-card.editing-item { border-left-color: var(--item-edit-border); background-color: var(--item-edit-bg); }
-
-        .item-left { flex: 1; min-width: 0; margin-right: 10px; }
-        .item-name { font-weight: 600; font-size: 1.05rem; color: var(--text-main); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .item-math { font-size: 0.85rem; color: var(--text-sec); }
-
-        .item-right { display: flex; align-items: center; gap: 8px; }
-        .item-total-price { font-weight: 800; font-size: 1.15rem; color: var(--text-main); margin-right: 5px; }
-
-        .icon-btn { border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: background 0.2s; }
-        .icon-btn svg { width: 20px; height: 20px; fill: currentColor; }
-
-        .btn-edit { background: var(--btn-edit-bg); color: var(--btn-edit-txt); }
-        .btn-edit:active { opacity: 0.8; }
-
-        .btn-delete { background: var(--btn-del-bg); color: var(--btn-del-txt); }
-        .btn-delete:active { opacity: 0.8; }
-
-        .footer { position: fixed; bottom: 0; left: 0; right: 0; background: var(--footer-bg); color: white; padding: 15px 20px; box-shadow: 0 -4px 20px rgba(0,0,0,0.3); display: flex; justify-content: space-between; align-items: center; z-index: 200; border-top: 1px solid var(--footer-border); }
-        .footer-col { display: flex; flex-direction: column; }
-        .label-total { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
-        .value-total { font-size: 1.2rem; font-weight: bold; }
-        .value-balance { font-size: 1.5rem; font-weight: 800; text-align: right; }
-        .positive { color: #00e676; } 
-        .negative { color: #ff5252; }
-        
-        .empty-state { text-align: center; color: var(--text-sec); margin-top: 30px; padding: 20px; }
-    </style>
+    <title>Calculadora de Mercado</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <div id="mainHeader" class="header">
-        <div class="header-top">
+    <div id="cabecalhoPrincipal" class="cabecalho">
+        <div class="topo-cabecalho">
             <label>MEU ORÇAMENTO</label>
-            <div class="header-actions">
-                <button id="btnTheme" class="btn-header" title="Alternar Tema"></button>
-                <button id="btnResetAll" class="btn-header">Limpar Tudo</button>
+            <div class="acoes-cabecalho">
+                <button id="botaoTema" class="botao-cabecalho" title="Alternar Tema"></button>
+                <button id="botaoLimparTudo" class="botao-cabecalho">Limpar Tudo</button>
             </div>
         </div>
-        <input type="tel" inputmode="numeric" id="budget" class="budget-input" placeholder="R$ 0,00">
+        <input type="tel" inputmode="numeric" id="entradaOrcamento" class="entrada-orcamento" placeholder="R$ 0,00">
     </div>
 
-    <div class="add-card" id="formCard">
-        <div class="form-grid">
-            <div class="field-container">
-                <input type="text" id="itemName" class="input-styled input-full" placeholder="Nome do produto (Opcional)">
+    <div class="cartao-adicionar" id="cartaoFormulario">
+        <input type="hidden" id="idItem">
+        <div class="grade-formulario">
+            <div class="container-campo">
+                <input type="text" id="entradaNome" class="entrada-estilizada entrada-completa" placeholder="Nome do produto (Opcional)">
             </div>
-            <div class="input-row">
-                <div class="field-container" style="flex: 2;">
-                    <label class="label-sm">Preço (R$)</label>
-                    <input type="tel" inputmode="numeric" id="price" class="input-styled input-price" placeholder="0,00">
+            <div class="linha-entrada">
+                <div class="container-campo" style="flex: 2;">
+                    <label class="etiqueta-pequena">Preço (R$)</label>
+                    <input type="tel" inputmode="numeric" id="entradaPreco" class="entrada-estilizada entrada-preco" placeholder="0,00">
                 </div>
-                <div class="field-container" style="flex: 1;">
-                    <label class="label-sm">Qtd</label>
-                    <input type="tel" inputmode="numeric" id="qty" class="input-styled input-qty" value="1" placeholder="1">
+                <div class="container-campo" style="flex: 1;">
+                    <label class="etiqueta-pequena">Qtd</label>
+                    <input type="tel" inputmode="numeric" id="entradaQtd" class="entrada-estilizada entrada-qtd" value="1" placeholder="1">
                 </div>
             </div>
-            <div class="actions-row">
-                <button id="btnMain" class="btn-main">Adicionar Item</button>
-                <button id="btnClear" class="btn-clear" title="Limpar Campos">
+            <div class="linha-acoes">
+                <button id="botaoSalvar" class="botao-principal">Adicionar Item</button>
+                <button id="botaoLimparCampos" class="botao-limpar" title="Limpar Campos">
                     <svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M19.36,2.72L20.78,4.14L15.06,9.85C16.13,11.39 16.28,13.24 15.38,14.44L9.06,8.12C10.26,7.22 12.11,7.37 13.65,8.44L19.36,2.72M5.93,17.57C3.92,15.56 2.69,13.16 2.35,10.92L7.23,8.83L14.67,16.27L12.58,21.15C10.34,20.81 7.94,19.58 5.93,17.57Z" /></svg>
                 </button>
             </div>
         </div>
     </div>
 
-    <div class="search-container">
-        <svg class="search-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
-        <input type="text" id="searchBar" class="search-input" placeholder="Buscar na lista...">
+    <div class="container-busca">
+        <svg class="icone-busca" viewBox="0 0 24 24"><path fill="currentColor" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+        <input type="text" id="barraBusca" class="entrada-busca" placeholder="Buscar na lista...">
     </div>
 
-    <div class="item-list" id="itemList"></div>
+    <div class="lista-itens" id="listaItens"></div>
     
-    <div class="footer">
-        <div class="footer-col">
-            <span class="label-total">Carrinho</span>
-            <span class="value-total" id="totalSpent">R$ 0,00</span>
+    <div class="rodape">
+        <div class="coluna-rodape">
+            <span class="rotulo-total">Carrinho</span>
+            <span class="valor-total" id="totalGasto">R$ 0,00</span>
         </div>
-        <div class="footer-col" style="align-items: flex-end;">
-            <span class="label-total">Disponível</span>
-            <span class="value-balance positive" id="remainingBalance">R$ 0,00</span>
+        <div class="coluna-rodape" style="align-items: flex-end;">
+            <span class="rotulo-total">Disponível</span>
+            <span class="valor-saldo positivo" id="saldoRestante">R$ 0,00</span>
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const refs = {
-                header: document.getElementById('mainHeader'),
-                budget: document.getElementById('budget'),
-                name: document.getElementById('itemName'),
-                price: document.getElementById('price'),
-                qty: document.getElementById('qty'),
-                btnMain: document.getElementById('btnMain'),
-                btnClear: document.getElementById('btnClear'),
-                btnResetAll: document.getElementById('btnResetAll'),
-                btnTheme: document.getElementById('btnTheme'),
-                search: document.getElementById('searchBar'),
-                list: document.getElementById('itemList'),
-                totalSpent: document.getElementById('totalSpent'),
-                remainingBalance: document.getElementById('remainingBalance')
-            };
-
-            let state = {
-                items: JSON.parse(localStorage.getItem('mercadoItems_v9')) || [],
-                budget: parseFloat(localStorage.getItem('mercadoBudget_v9')) || 0,
-                editingId: null,
-                searchTerm: ''
-            };
-
-            const iconSun = '<svg viewBox="0 0 24 24"><path d="M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,2L14.39,5.42C13.65,5.15 12.84,5 12,5C11.16,5 10.35,5.15 9.61,5.42L12,2M3.34,7L7.5,5.29C7.24,5.84 6.96,6.42 6.69,7L2.5,9L3.34,7M3.36,17L2.5,15L6.68,17C6.95,17.58 7.23,18.16 7.49,18.71L3.36,17M20.65,7L21.5,9L17.3,7C17.03,6.42 16.75,5.84 16.5,5.29L20.65,7M20.64,17L16.5,18.71C16.76,18.16 17.04,17.58 17.31,17L21.5,15L20.64,17M12,22L9.61,18.58C10.35,18.85 11.16,19 12,19C12.84,19 13.65,18.85 14.39,18.58L12,22Z" /></svg>';
-            const iconMoon = '<svg viewBox="0 0 24 24"><path d="M17.75,4.09L15.22,6.03L16.13,9.09L13.5,7.28L10.87,9.09L11.78,6.03L9.25,4.09L12.44,4L13.5,1L14.56,4L17.75,4.09M21.25,11L19.61,12.25L20.2,14.23L18.5,13.06L16.8,14.23L17.39,12.25L15.75,11L17.81,10.95L18.5,9L19.19,10.95L21.25,11M18.97,15.95C19.8,15.87 20.69,17.05 20.16,17.8C19.84,18.25 19.5,18.67 19.08,19.07C15.17,23 8.84,23 4.94,19.07C1.03,15.17 1.03,8.84 4.94,4.94C5.34,4.53 5.76,4.17 6.21,3.85C6.96,3.32 8.14,4.21 8.06,5.04C7.79,7.9 8.75,10.87 10.95,13.06C13.14,15.26 16.1,16.22 18.97,15.95M17.33,17.97C14.5,17.81 11.7,16.64 9.53,14.5C7.38,12.35 6.21,9.54 6.05,6.71C4.26,8.35 3.13,10.87 3.5,13.56C3.87,16.26 6.15,18.54 8.85,18.91C11.45,19.29 13.95,18.2 15.6,16.4C16.25,15.7 16.84,14.9 17.33,14Z" /></svg>';
-
-            const savedTheme = localStorage.getItem('mercadoTheme');
-            const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-            
-            if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
-                document.body.classList.add('dark-mode');
-                refs.btnTheme.innerHTML = iconSun;
-            } else {
-                refs.btnTheme.innerHTML = iconMoon;
-            }
-
-            refs.btnTheme.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
-                const isDark = document.body.classList.contains('dark-mode');
-                refs.btnTheme.innerHTML = isDark ? iconSun : iconMoon;
-                localStorage.setItem('mercadoTheme', isDark ? 'dark' : 'light');
-            });
-
-            const formatMoney = (val) => val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-            const parseMasked = (str) => parseFloat(str.replace(/\./g, '').replace(',', '.') || 0);
-            const formatToInput = (num) => num.toFixed(2).replace('.', ',');
-
-            const applyCurrencyMask = (input) => {
-                let value = input.value.replace(/\D/g, "");
-                if (value === "") { input.value = ""; return; }
-                value = (parseInt(value) / 100).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-                input.value = value;
-            };
-
-            const saveState = () => {
-                localStorage.setItem('mercadoItems_v9', JSON.stringify(state.items));
-                localStorage.setItem('mercadoBudget_v9', state.budget);
-            };
-
-            const createIcon = (pathData) => {
-                const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-                svg.setAttribute("viewBox", "0 0 24 24");
-                svg.appendChild((() => {
-                    const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                    p.setAttribute("d", pathData);
-                    return p;
-                })());
-                return svg;
-            };
-
-            const renderCalculations = () => {
-                const totalSpent = state.items.reduce((acc, i) => acc + i.total, 0);
-                const remaining = state.budget - totalSpent;
-
-                refs.totalSpent.textContent = formatMoney(totalSpent);
-                refs.remainingBalance.textContent = formatMoney(remaining);
-
-                if (remaining < 0) {
-                    refs.remainingBalance.classList.remove('positive');
-                    refs.remainingBalance.classList.add('negative');
-                } else {
-                    refs.remainingBalance.classList.remove('negative');
-                    refs.remainingBalance.classList.add('positive');
-                }
-            };
-
-            const renderList = () => {
-                while (refs.list.firstChild) refs.list.removeChild(refs.list.firstChild);
-
-                const filteredItems = state.items.filter(item => 
-                    item.name.toLowerCase().includes(state.searchTerm.toLowerCase())
-                );
-
-                if (state.items.length === 0) {
-                    const emptyDiv = document.createElement('div');
-                    emptyDiv.className = 'empty-state';
-                    emptyDiv.textContent = '🛒 Sua lista está vazia.';
-                    refs.list.appendChild(emptyDiv);
-                } else if (filteredItems.length === 0) {
-                    const emptyDiv = document.createElement('div');
-                    emptyDiv.className = 'empty-state';
-                    emptyDiv.textContent = '🔍 Nenhum item encontrado.';
-                    refs.list.appendChild(emptyDiv);
-                } else {
-                    filteredItems.slice().reverse().forEach(item => {
-                        const card = document.createElement('div');
-                        card.className = 'item-card';
-                        
-                        if (item.id === state.editingId) {
-                            card.classList.add('editing-item');
-                        }
-
-                        const leftDiv = document.createElement('div');
-                        leftDiv.className = 'item-left';
-                        const nameEl = document.createElement('div');
-                        nameEl.className = 'item-name';
-                        nameEl.textContent = item.name;
-                        const mathEl = document.createElement('div');
-                        mathEl.className = 'item-math';
-                        mathEl.textContent = `${item.qty} x ${formatMoney(item.price)}`;
-                        leftDiv.appendChild(nameEl);
-                        leftDiv.appendChild(mathEl);
-
-                        const rightDiv = document.createElement('div');
-                        rightDiv.className = 'item-right';
-                        const totalEl = document.createElement('div');
-                        totalEl.className = 'item-total-price';
-                        totalEl.textContent = formatMoney(item.total);
-
-                        const btnEdit = document.createElement('button');
-                        btnEdit.className = 'icon-btn btn-edit';
-                        btnEdit.appendChild(createIcon("M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"));
-                        btnEdit.onclick = () => startEdit(item);
-
-                        const btnDelete = document.createElement('button');
-                        btnDelete.className = 'icon-btn btn-delete';
-                        btnDelete.appendChild(createIcon("M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z"));
-                        btnDelete.onclick = () => {
-                            if (navigator.vibrate) navigator.vibrate(50);
-                            if (state.editingId === item.id) exitEditMode(); 
-                            if (confirm(`Remover "${item.name}"?`)) {
-                                state.items = state.items.filter(i => i.id !== item.id);
-                                saveState();
-                                renderList();
-                                renderCalculations();
-                            }
-                        };
-
-                        rightDiv.appendChild(totalEl);
-                        rightDiv.appendChild(btnEdit);
-                        rightDiv.appendChild(btnDelete);
-
-                        card.appendChild(leftDiv);
-                        card.appendChild(rightDiv);
-                        refs.list.appendChild(card);
-                    });
-                }
-                renderCalculations();
-            };
-
-            const startEdit = (item) => {
-                refs.name.value = item.name;
-                refs.price.value = formatToInput(item.price);
-                refs.qty.value = item.qty;
-                state.editingId = item.id;
-                
-                refs.btnMain.textContent = "Salvar Alteração";
-                refs.btnMain.classList.add('is-editing');
-                refs.header.classList.add('editing');
-                
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                refs.price.focus();
-                renderList();
-            };
-
-            const exitEditMode = () => {
-                state.editingId = null;
-                refs.name.value = '';
-                refs.price.value = '';
-                refs.qty.value = '1';
-                refs.btnMain.textContent = "Adicionar Item";
-                refs.btnMain.classList.remove('is-editing');
-                refs.header.classList.remove('editing');
-                renderList();
-            };
-
-            const handleMainButton = () => {
-                const nameVal = refs.name.value.trim();
-                const price = parseMasked(refs.price.value);
-                const qty = parseFloat(refs.qty.value.replace(',', '.'));
-
-                if (!price || price === 0) {
-                    alert("Insira o preço.");
-                    refs.price.focus();
-                    return;
-                }
-                if (!qty) return alert("Qtd inválida");
-
-                const total = price * qty;
-                const displayName = nameVal || (state.editingId ? "Item sem nome" : `Item ${state.items.length + 1}`);
-
-                if (state.editingId) {
-                    const index = state.items.findIndex(i => i.id === state.editingId);
-                    if (index !== -1) {
-                        state.items[index] = { ...state.items[index], name: displayName, price, qty, total };
-                    }
-                    exitEditMode();
-                } else {
-                    state.items.push({
-                        id: Date.now(),
-                        name: displayName,
-                        price,
-                        qty,
-                        total
-                    });
-                    
-                    refs.name.value = '';
-                    refs.price.value = '';
-                    refs.qty.value = '1';
-                    refs.search.value = '';
-                    state.searchTerm = '';
-                    refs.name.focus();
-                }
-
-                saveState();
-                renderList();
-            };
-
-            const handleResetAll = () => {
-                if (state.items.length === 0) return;
-                if(confirm("Tem certeza que deseja apagar TODAS as compras?")) {
-                   state.items = [];
-                   exitEditMode();
-                   saveState();
-                   renderList();
-                }
-            };
-
-            refs.btnMain.addEventListener('click', handleMainButton);
-            
-            refs.btnClear.addEventListener('click', () => {
-                if(state.editingId) exitEditMode();
-                else {
-                    refs.name.value = '';
-                    refs.price.value = '';
-                    refs.qty.value = '1';
-                    refs.name.focus();
-                }
-            });
-
-            refs.btnResetAll.addEventListener('click', handleResetAll);
-
-            refs.search.addEventListener('keyup', (e) => {
-                state.searchTerm = e.target.value;
-                renderList();
-            });
-
-            refs.budget.addEventListener('keyup', function() {
-                applyCurrencyMask(this);
-                const raw = this.value.replace(/\D/g, '');
-                state.budget = raw ? parseInt(raw) / 100 : 0;
-                saveState();
-                renderCalculations();
-            });
-            
-            refs.price.addEventListener('keyup', function() { applyCurrencyMask(this); });
-
-            if (state.budget > 0) refs.budget.value = formatToInput(state.budget);
-            renderList();
-        });
-    </script>
+    <script type="module" src="src/index.js"></script>
 </body>
 </html>
