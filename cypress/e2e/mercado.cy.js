@@ -4,12 +4,10 @@ describe('Fluxo Completo da Calculadora de Mercado', () => {
   beforeEach(() => {
     cy.clearLocalStorage()
     
-    // Visita a página forçando a preferência de sistema para "CLARO" (light)
-    // Isso evita que o teste falhe se o seu Windows estiver em modo escuro
     cy.visit('http://127.0.0.1:5500/mercado.html', {
       onBeforeLoad(win) {
         cy.stub(win, 'matchMedia').returns({
-          matches: false, // false = não prefere tema escuro (logo, é claro)
+          matches: false,
           addListener: () => {},
           removeListener: () => {}
         })
@@ -150,10 +148,8 @@ describe('Fluxo Completo da Calculadora de Mercado', () => {
   })
 
   it('Deve ignorar item no cálculo ao desmarcar checkbox', () => {
-    // CORREÇÃO: Digitar 10000 para virar R$ 100,00
     cy.get('#entradaOrcamento').type('10000') 
     cy.get('#entradaNome').type('Carne')
-    // Digitar 5000 para virar R$ 50,00
     cy.get('#entradaPreco').type('5000') 
     cy.get('#botaoSalvar').click()
     cy.wait(tempoEspera)
@@ -190,7 +186,6 @@ describe('Fluxo Completo da Calculadora de Mercado', () => {
   })
 
   it('Deve alternar entre tema claro e escuro', () => {
-    // Agora o teste começa garantidamente no modo CLARO devido ao stub no beforeEach
     cy.get('body').should('not.have.class', 'modo-escuro')
     
     cy.get('#botaoTema').click()
